@@ -172,6 +172,7 @@ while (<$reference_fp>) {
   }
   else {
     printf $new_reference_fp "%s\n", $line;
+    next;
   }
   
   if (defined ($reference_to_lines{$key})) {
@@ -204,10 +205,11 @@ while (<$markers_fp>) {
   }
   else {
     printf $new_markers_fp "%s\n", $line;
+    next;
   }
   
   if (defined ($markers_to_lines{$key})) {
-    printf STDERR "EE\tUnexpected duplicate key in markers:  %s\n", $key;
+    printf STDERR "EE\tUnexpected duplicate key in markers:  [%s]\n", $key;
     exit (1);
   }
   
