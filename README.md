@@ -14,6 +14,7 @@ Requirements
 |Software       |Version  |Required?  |Conda package |
 |---------------|:-------:|:---------:|:-------------|
 |perl           | v5.26.2 | Yes       |perl          |
+|perl-appconfig | 1.71    | Yes       |perl-appconfig|
 
 These scripts have been used within a Ubuntu operating system and, more recently, within a [Conda](https://docs.conda.io/en/latest/) environment.  Most of them (if not all) have been implemented in Perl.
 
