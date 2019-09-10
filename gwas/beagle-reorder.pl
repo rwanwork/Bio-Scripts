@@ -175,7 +175,7 @@ while (<$reference_fp>) {
   }
   
   if (defined ($reference_to_lines{$key})) {
-    printf STDERR "EE\tUnexpected duplicate key in reference panel:  %s\n", $key;
+    printf STDERR "EE\tUnexpected duplicate key in reference panel:  [%s]\n", $key;
     exit (1);
   }
   
