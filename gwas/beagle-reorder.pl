@@ -167,7 +167,7 @@ foreach my $sample_key (sort (keys %reference_markers_to_lines)) {
 ##  Print out overall statistics
 ########################################
 
-if ($config -> get ("help")) {
+if ($config -> get ("verbose")) {
   printf STDERR "II\tNumber of reference markers:  %u\n", $reference_total_markers;
   printf STDERR "II\tNumber of sample markers:  %u\n", $sample_total_markers;
   printf STDERR "II\tNumber of overlapping markers:  %u\n", $overlapping_markers;
