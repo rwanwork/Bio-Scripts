@@ -117,7 +117,7 @@ while (<$reference_fp>) {
   chomp $line;
   
   my $key = "";
-  if ($line =~ /^M (.+) /) {
+  if ($line =~ /^M (\S+) /) {
     $key = $1;
   }
   else {
