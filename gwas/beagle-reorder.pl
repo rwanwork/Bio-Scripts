@@ -46,6 +46,11 @@ my $sample_fn_arg = "";
 my @reference_lines;
 my %reference_markers_to_lines;
 
+##  Accumulators
+my $reference_total_markers = 0;
+my $sample_total_markers = 0;
+my $overlapping_markers = 0;
+
 
 ########################################
 ##  Process arguments
@@ -116,7 +121,7 @@ while (<$reference_fp>) {
     $key = $1;
   }
   else {
-    print "%s\n", $line;
+    printf "%s\n", $line;
   }
   
   $reference_lines[$pos] = $line;  
@@ -124,6 +129,7 @@ while (<$reference_fp>) {
   $pos++;
 }
 close ($reference_fp);
+$reference_total_markers = $pos;
 
 
 ########################################
@@ -143,12 +149,28 @@ while (<$sample_fp>) {
     
     ##  Delete the hash
     delete ($reference_markers_to_lines{$sample_key});
+    $overlapping_markers++;
   }
+  $sample_total_markers++;
 }
 
+##  Even though we do not need them, we print out 
+##    the remaining markers in the reference that 
+##    did not exist in the sample
 foreach my $sample_key (sort (keys %reference_markers_to_lines)) {
   my $new_pos = $reference_markers_to_lines{$sample_key};
   printf "%s\n", $reference_lines[$new_pos];
+}
+
+
+########################################
+##  Print out overall statistics
+########################################
+
+if ($config -> get ("help")) {
+  printf STDERR "II\tNumber of reference markers:  %u\n", $reference_total_markers;
+  printf STDERR "II\tNumber of sample markers:  %u\n", $sample_total_markers;
+  printf STDERR "II\tNumber of overlapping markers:  %u\n", $overlapping_markers;
 }
 
 
@@ -164,7 +186,7 @@ B<beagle-reorder.pl> --reference I<reference panel> --sample I<sample> >new-refe
 
 =head1 DESCRIPTION
 
-Reorder a reference panel in Beagle v3.x format according to the order of the markers in a sample.
+Reorder a reference panel in Beagle v3.x format according to the order of the markers in a sample.  Note that the markers are compared according to a B<case sensitive> match.
 
 =head1 OPTIONS
 
